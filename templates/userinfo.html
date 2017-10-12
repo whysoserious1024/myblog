@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% for user in user_list %}
+    <table>
+        <ul>
+            <tr>
+                <td>UserName: </td><td>{{ user.userName }}</td>
+            </tr>
+            <tr>
+                <td>PassWord: </td><td>{{ user.passWord }}</td>
+            </tr>
+        </ul>
+    </table>
+    {% endfor %}
+</div>
+
+{% endblock %}

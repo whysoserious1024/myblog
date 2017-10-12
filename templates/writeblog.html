@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+
+{% block content %}
+
+<script language="JavaScript">
+
+    function chick(){
+        var title = $("#title").val();
+        var category = $("#category").val();
+        var content = $("#content").val();
+
+        if (title==""||category==""||content==""){
+            alert("title、category和content不能为空");
+            return false;
+        }
+    }
+</script>
+
+<form action="articlePost" method="post" onsubmit="return chick()">
+    {% csrf_token %}
+    Title: <input type="text" name="title" id="title"><br>
+    Category: <input type="text" name="category" id="category"><br>
+    Content: <textarea name="content" id="content"></textarea><br>
+    <input type="submit" value="提交">
+</form>
+{% endblock %}
