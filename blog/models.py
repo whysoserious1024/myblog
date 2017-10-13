@@ -11,10 +11,3 @@ class Article(models.Model) :
     class Meta:
         ordering = ['-date_time']
 
-class User(models.Model):
-    userName = models.CharField(max_length=50)#用户姓名
-    passWord = models.CharField(max_length=50)#密码
-    userType = models.CharField(max_length=10)#用户类别
-
-    def __str__(self):
-        return self.userName
