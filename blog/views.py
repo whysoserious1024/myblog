@@ -15,13 +15,12 @@ def userlogin(request):
         user = authenticate(username=username,password=password)
         if user:
             login(request,user)
-            return HttpResponseRedirect('/index')
+            request.session['username']=username
+            return HttpResponseRedirect('/')
         else:
             return render(request,'login.html',{'msg':'用户名或密码错误'})
     else:
         return render(request,'login.html',{'msg':''})
-
-
 
 
 
@@ -33,9 +32,20 @@ def detail(request,id):
     return render(request,'article.html',{'post':post})
 
 def home(request):
-    post_list = Article.objects.all()
-    return render(request,'index.html',{'post_list':post_list})
+    username = request.session.get('username')
+    if username:
+        post_list = Article.objects.all()
+        return render(request,'index.html',{'post_list':post_list})
+    else:
+        return HttpResponseRedirect("/login/")
 
+
+def editBlog(request,id):
+    try:
+        post = Article.objects.get(id=str(id))
+        return render(request,'writeblog.html',{'post':post})
+    except Article.DoesNotExits:
+        return Http404
 
 def writeBlog(request):
     return render(request,'writeblog.html')

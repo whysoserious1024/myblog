@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="posts">
+    <input type="submit" value="编辑" onclick="location.href='/editBlog/{{post.id}}'">
         <section class="post">
             <header class="post-header">
                 <h2 class="post-title">{{ post.title }}</h2>

@@ -18,11 +18,11 @@
     }
 </script>
 
-<form action="articlePost" method="post" onsubmit="return chick()">
+<form action="../../articlePost" method="post" onsubmit="return chick()">
     {% csrf_token %}
-    Title: <input type="text" name="title" id="title"><br>
-    Category: <input type="text" name="category" id="category"><br>
-    Content: <textarea name="content" id="content"></textarea><br>
+    Title: <input type="text" name="title" id="title" value="{{post.title}}"><br>
+    Category: <input type="text" name="category" id="category" value="{{post.category}}"><br>
+    Content: <textarea name="content" id="content" cols="50" rows="8">{{post.content}}</textarea><br>
     <input type="submit" value="提交">
 </form>
 {% endblock %}
