@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="{% static '/static/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
-    <form  method="post">
+    <form  method="post" class="container form-inline">
         {% csrf_token %}
-        {{msg}}
-        <table>
+        <div class="table-responsive">
+        <h3 class="col-md-2">请登录</h3>
+        <table class="table table-condensed table-hover col-md-8">
             <tr>
-                <td>登录名：</td>
-                <td><input type="text" name="username"></td>
+                <td><label for="name">登录名：</label></td>
+                <td><input type="text" name="username" class="form-control"></td>
             </tr>
             <tr>
-                <td>密码：</td>
-                <td><input type="text" name="password"></td>
+                <td><label for="password">密码：</label></td>
+                <td><input type="text" name="password" class="form-control"></td>
             </tr>
             <tr>
                 <td><input type="submit" value="提交"></td>
+                <td>{{msg}}</td>
             </tr>
         </table>
+        </div>
     </form>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

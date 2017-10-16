@@ -20,6 +20,14 @@
 
 <form action="../../articlePost" method="post" onsubmit="return chick()">
     {% csrf_token %}
+    {% load staticfiles %}
+        <script src="{% static '/static/activate-power-mode.js' %}"></script>
+        <script>
+            POWERMODE.colorful = true;
+            POWERMODE.shake = true;
+            document.body.addEventListener('input',POWERMODE);
+        </script>
+    <input type="hidden" name="id" value="{{post.id}}">
     Title: <input type="text" name="title" id="title" value="{{post.title}}"><br>
     Category: <input type="text" name="category" id="category" value="{{post.category}}"><br>
     Content: <textarea name="content" id="content" cols="50" rows="8">{{post.content}}</textarea><br>

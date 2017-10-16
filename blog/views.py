@@ -1,9 +1,7 @@
-from django.shortcuts import render,render_to_response
-from django.http import HttpResponse,Http404,HttpResponseRedirect
-from django.template.context import RequestContext
-from django.views.decorators import csrf
+from django.shortcuts import render
+from django.http import Http404,HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.decorators import login_required
 from blog.models import Article
 import time
 
@@ -23,7 +21,7 @@ def userlogin(request):
         return render(request,'login.html',{'msg':''})
 
 
-
+@login_required
 def detail(request,id):
     try:
         post = Article.objects.get(id=str(id))
@@ -31,6 +29,7 @@ def detail(request,id):
         return Http404
     return render(request,'article.html',{'post':post})
 
+@login_required
 def home(request):
     username = request.session.get('username')
     if username:
@@ -39,7 +38,7 @@ def home(request):
     else:
         return HttpResponseRedirect("/login/")
 
-
+@login_required
 def editBlog(request,id):
     try:
         post = Article.objects.get(id=str(id))
@@ -47,14 +46,20 @@ def editBlog(request,id):
     except Article.DoesNotExits:
         return Http404
 
+@login_required
 def writeBlog(request):
     return render(request,'writeblog.html')
 
+@login_required
 def articlePost(request):
     con = {}
     if request.POST :
         con['title'] = request.POST['title']
         con['category'] = request.POST['category']
         con['content'] = request.POST['content']
-        Article.objects.create(**con)
+        if (request.POST['id']):
+            con['id'] = request.POST['id']
+            Article.objects.filter(id=str(con['id'])).update(**con)
+        else:
+            Article.objects.create(**con)
     return HttpResponseRedirect('/')
