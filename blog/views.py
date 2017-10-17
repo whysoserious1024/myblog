@@ -20,6 +20,10 @@ def userlogin(request):
     else:
         return render(request,'login.html',{'msg':''})
 
+@login_required
+def userLogout(request):
+    logout(request)
+    return HttpResponseRedirect('/login')
 
 @login_required
 def detail(request,id):
@@ -31,12 +35,12 @@ def detail(request,id):
 
 @login_required
 def home(request):
-    username = request.session.get('username')
-    if username:
-        post_list = Article.objects.all()
-        return render(request,'index.html',{'post_list':post_list})
-    else:
-        return HttpResponseRedirect("/login/")
+    post_list = Article.objects.all()
+    # print(post_list)
+    # for post in post_list:
+    #     print(type(post.all()))
+    return render(request,'index.html',{'post_list':post_list})
+
 
 @login_required
 def editBlog(request,id):

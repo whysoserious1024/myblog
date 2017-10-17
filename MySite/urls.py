@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.home,name='home'),
     url(r'^login/$',views.userlogin,name='userlogin'),
+    url(r'userLogout/',views.userLogout,name='userLogout'),
     url(r'^(?P<id>\d+)/$',views.detail,name='detail'),
     url(r'^editBlog/(?P<id>\d+)/$',views.editBlog,name='editBlog'),
     url(r'^writeBlog/$',views.writeBlog,name='writeBlog'),

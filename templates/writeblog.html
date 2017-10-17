@@ -17,20 +17,31 @@
         }
     }
 </script>
-
-<form action="../../articlePost" method="post" onsubmit="return chick()">
+{% load staticfiles %}
+<script src="{% static '/static/activate-power-mode.js' %}"></script>
+<script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = true;
+    document.body.addEventListener('input',POWERMODE);
+</script>
+<form action="../../articlePost" method="post" onsubmit="return chick()" class="form-group form-inline">
     {% csrf_token %}
-    {% load staticfiles %}
-        <script src="{% static '/static/activate-power-mode.js' %}"></script>
-        <script>
-            POWERMODE.colorful = true;
-            POWERMODE.shake = true;
-            document.body.addEventListener('input',POWERMODE);
-        </script>
-    <input type="hidden" name="id" value="{{post.id}}">
-    Title: <input type="text" name="title" id="title" value="{{post.title}}"><br>
-    Category: <input type="text" name="category" id="category" value="{{post.category}}"><br>
-    Content: <textarea name="content" id="content" cols="50" rows="8">{{post.content}}</textarea><br>
-    <input type="submit" value="提交">
+
+    <input class="form-control " type="hidden" name="id" value="{{post.id}}">
+    <table class="col-md-8">
+        <tr>
+            <td class="col-md-2"><label>Title:</label></td>
+            <td><input class="form-control" type="text" name="title" id="title" value="{{post.title}}"></td>
+        </tr>
+        <tr>
+            <td class="col-md-2"><label>Category:</label></td>
+            <td><input class="form-control type="text" name="category" id="category" value="{{post.category}}"></td>
+        </tr>
+        <tr>
+            <td class="col-md-2"><label>Content:</label></td>
+            <td><textarea class="form-control" name="content" id="content" cols="50" rows="8">{{post.content}}</textarea></td>
+        </tr>
+        <tr><td class="col-md-2"><input type="submit" value="提交"></td></tr>
+    </table>
 </form>
 {% endblock %}

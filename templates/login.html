@@ -6,20 +6,31 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link href="{% static '/static/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        .vertical-center{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+       .form-inline .form-control{
+            width:100%;
+        }
+    </style>
 </head>
 <body>
-    <form  method="post" class="container form-inline">
+    <form  method="post" class="container form-inline form-horizontal">
         {% csrf_token %}
-        <div class="table-responsive">
-        <h3 class="col-md-2">请登录</h3>
-        <table class="table table-condensed table-hover col-md-8">
+        <div class="table-responsive vertical-center col-md-4">
+        <h3 class="col-md-4">请登录</h3>
+        <table class="table table-condensed table-hover col-md-4">
             <tr>
-                <td><label for="name">登录名：</label></td>
+                <td class="col-md-2"><label for="name" class="control-label ">登录名：</label></td>
                 <td><input type="text" name="username" class="form-control"></td>
             </tr>
             <tr>
-                <td><label for="password">密码：</label></td>
-                <td><input type="text" name="password" class="form-control"></td>
+                <td class="col-md-2"><label for="password" class="control-label">密码：</label></td>
+                <td><input type="password" name="password" class="form-control"></td>
             </tr>
             <tr>
                 <td><input type="submit" value="提交"></td>
