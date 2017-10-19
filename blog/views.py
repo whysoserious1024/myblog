@@ -36,9 +36,9 @@ def detail(request,id):
 @login_required
 def home(request):
     post_list = Article.objects.all()
-    # print(post_list)
-    # for post in post_list:
-    #     print(type(post.all()))
+    for post in post_list:
+        content = str(post.content)
+        post.content = content[0:20]
     return render(request,'index.html',{'post_list':post_list})
 
 
